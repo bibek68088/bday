@@ -28,7 +28,7 @@ export default function BirthdayMessages({
 
   const messages = [
     {
-      title: "Hey Aakrity!",
+      title: "Sanu!",
       message:
         "Today is your special day, and I wanted to make it unforgettable for you! 🎂",
       emoji: "🎉",
@@ -222,7 +222,7 @@ export default function BirthdayMessages({
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
-                className="text-2xl sm:text-3xl md:text-4xl font-bold text-purple-800 mb-4 sm:mb-6"
+                className="text-2xl sm:text-3xl md:text-4xl font-handwriting font-bold text-purple-800 mb-4 sm:mb-6"
               >
                 {messages[currentStep].title}
               </motion.h2>
@@ -255,7 +255,7 @@ export default function BirthdayMessages({
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6 }}
-                className="text-lg sm:text-xl md:text-2xl text-purple-700 mb-6 sm:mb-10 px-2 sm:px-4"
+                className="text-lg sm:text-xl md:text-2xl text-purple-700 font-handwriting font-medium mb-6 sm:mb-10 px-2 sm:px-4"
               >
                 {messages[currentStep].message}
               </motion.p>
@@ -268,7 +268,7 @@ export default function BirthdayMessages({
               >
                 <button
                   onClick={handleNext}
-                  className={`px-4 sm:px-6 py-2 sm:py-3 rounded-full ${buttonStyle.bg} ${buttonStyle.text} font-medium text-base sm:text-lg flex items-center justify-center mx-auto shadow-lg hover:shadow-xl transition-all duration-300`}
+                  className={`px-4 sm:px-6 py-2 sm:py-3 font-handwriting font-medium rounded-full ${buttonStyle.bg} ${buttonStyle.text} font-medium text-base sm:text-lg flex items-center justify-center mx-auto shadow-lg hover:shadow-xl transition-all duration-300`}
                 >
                   {currentStep < messages.length - 1 ? (
                     <>

@@ -56,13 +56,13 @@ export default function FinalCelebration({ name = "Aakrity", from = "Bibek" }) {
   }, [])
 
   const wishes = [
-    "May your day be as bright as your smile and as lovely as you are, Aakrity.",
+    "May your day be as bright as your smile and as lovely as you are, Babe.",
     "Wishing you a day filled with happiness and a year filled with joy. You deserve it all!",
     "Hope your special day brings you all that your heart desires! I'm so lucky to have you.",
     "Here's to another year of laughing together, crying together, and growing together. I cherish every moment.",
     "May the joy that you have spread in the past come back to you on this day. Happy Birthday!",
     "Wishing you a beautiful day with good health and happiness forever. I love you more than words can say.",
-    "Count your life by smiles, not tears. Count your age by friends, not years. I'll always be here for you.",
+    "Older? For Sure. Wiser? Not so much. Happy Birthday 😘",
     "May this special day bring you endless joy and tons of precious memories! You mean everything to me.",
   ]
 
@@ -227,7 +227,7 @@ export default function FinalCelebration({ name = "Aakrity", from = "Bibek" }) {
           </motion.div>
 
           <motion.h1
-            className="text-5xl md:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600 mb-4"
+            className="text-5xl md:text-7xl font-handwriting font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600 mb-4"
             animate={{
               backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
             }}
@@ -244,7 +244,7 @@ export default function FinalCelebration({ name = "Aakrity", from = "Bibek" }) {
           </motion.h1>
 
           <motion.p
-            className="text-xl md:text-2xl text-purple-700 max-w-2xl mx-auto"
+            className="text-xl md:text-2xl text-purple-700 max-w-2xl font-handwriting font-medium mx-auto"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
@@ -289,7 +289,7 @@ export default function FinalCelebration({ name = "Aakrity", from = "Bibek" }) {
         </motion.div>
 
         {/* Navigation tabs - sticky for scrolling */}
-        <div className="flex justify-center mb-8 gap-1 sm:gap-2 flex-wrap sticky top-4 z-30 py-2 px-2 sm:px-4 backdrop-blur-md bg-white/30 rounded-full shadow-lg">
+        <div className="flex justify-center font-handwriting font-medium mb-8 gap-1 sm:gap-2 flex-wrap sticky top-4 z-30 py-2 px-2 sm:px-4 backdrop-blur-md bg-white/30 rounded-full shadow-lg">
           {["wishes", "gallery", "memories", "message", "gift", "forever"].map((tab) => (
             <motion.button
               key={tab}
@@ -384,7 +384,7 @@ export default function FinalCelebration({ name = "Aakrity", from = "Bibek" }) {
                         >
                           <Star className="w-6 h-6 text-purple-500" />
                         </motion.div>
-                        <p className="text-lg text-purple-800 italic">{wish}</p>
+                        <p className="text-lg text-purple-800 font-handwriting font-medium">{wish}</p>
                       </div>
                     </motion.div>
                   ))}
@@ -395,7 +395,7 @@ export default function FinalCelebration({ name = "Aakrity", from = "Bibek" }) {
             {activeTab === "gallery" && (
               <div className="overflow-visible">
                 <motion.h2
-                  className="text-3xl font-bold text-purple-700 mb-8 text-center"
+                  className="text-3xl font-handwriting font-bold text-purple-700 mb-8 text-center"
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ type: "spring", stiffness: 300, damping: 20 }}
@@ -410,7 +410,7 @@ export default function FinalCelebration({ name = "Aakrity", from = "Bibek" }) {
 
                 <div className="mt-12 text-center">
                   <motion.p
-                    className="text-lg text-purple-700 italic mb-4"
+                    className="text-lg text-purple-700 font-handwriting font-medium mb-4"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.6 }}
@@ -423,13 +423,13 @@ export default function FinalCelebration({ name = "Aakrity", from = "Bibek" }) {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.8 }}
                   >
-                    <button
+                    {/* <button
                       onClick={() => setShowFireworks(true)}
                       className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white px-6 py-3 rounded-full flex items-center"
                     >
                       View More Photos
                       <Camera className="ml-2 h-5 w-5" />
-                    </button>
+                    </button> */}
                   </motion.div>
                 </div>
               </div>
@@ -438,7 +438,7 @@ export default function FinalCelebration({ name = "Aakrity", from = "Bibek" }) {
             {activeTab === "memories" && (
               <div ref={memoriesRef}>
                 <motion.h2
-                  className="text-3xl font-bold text-purple-700 mb-8 text-center"
+                  className="text-3xl font-handwriting font-bold text-purple-700 mb-8 text-center"
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ type: "spring", stiffness: 300, damping: 20 }}
@@ -479,8 +479,8 @@ export default function FinalCelebration({ name = "Aakrity", from = "Bibek" }) {
                         <Heart className="w-8 h-8 text-pink-500" />
                       </motion.div>
                       <div>
-                        <h3 className="text-xl font-bold text-purple-700">{memory.title}</h3>
-                        <p className="text-purple-600">{memory.description}</p>
+                        <h3 className="text-xl font-handwriting font-bold text-purple-700">{memory.title}</h3>
+                        <p className="text-purple-600 font-handwriting font-medium">{memory.description}</p>
                       </div>
                     </motion.div>
                   ))}
@@ -488,7 +488,7 @@ export default function FinalCelebration({ name = "Aakrity", from = "Bibek" }) {
 
                 <div className="mt-8 text-center">
                   <motion.p
-                    className="text-lg text-purple-700 italic mb-4"
+                    className="text-lg text-purple-700 font-handwriting font-medium mb-4"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.6 }}
@@ -501,7 +501,7 @@ export default function FinalCelebration({ name = "Aakrity", from = "Bibek" }) {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.8 }}
                   >
-                    <button
+                    {/* <button
                       onClick={() => {
                         setShowFireworks(true)
                         setShowConfetti(true)
@@ -511,7 +511,7 @@ export default function FinalCelebration({ name = "Aakrity", from = "Bibek" }) {
                     >
                       Let's Make More Memories
                       <Calendar className="ml-2 h-5 w-5" />
-                    </button>
+                    </button> */}
                   </motion.div>
                 </div>
               </div>
@@ -551,7 +551,7 @@ export default function FinalCelebration({ name = "Aakrity", from = "Bibek" }) {
                   className="space-y-4"
                 >
                   <motion.p
-                    className="text-xl text-purple-700 mb-6"
+                    className="text-xl text-purple-700 font-handwriting font-medium mb-6"
                     initial={{ opacity: 0, y: 10 }}
                     animate={messageInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ delay: 0.4 }}
@@ -559,7 +559,7 @@ export default function FinalCelebration({ name = "Aakrity", from = "Bibek" }) {
                     My Dearest {name},
                   </motion.p>
                   <motion.p
-                    className="text-lg text-purple-600 mb-4"
+                    className="text-lg text-purple-600 font-handwriting font-medium mb-4"
                     initial={{ opacity: 0, y: 10 }}
                     animate={messageInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ delay: 0.5 }}
@@ -568,7 +568,7 @@ export default function FinalCelebration({ name = "Aakrity", from = "Bibek" }) {
                     love make every day brighter and every moment more meaningful.
                   </motion.p>
                   <motion.p
-                    className="text-lg text-purple-600 mb-4"
+                    className="text-lg text-purple-600 font-handwriting font-medium mb-4"
                     initial={{ opacity: 0, y: 10 }}
                     animate={messageInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ delay: 0.6 }}
@@ -577,7 +577,7 @@ export default function FinalCelebration({ name = "Aakrity", from = "Bibek" }) {
                     celebrate another year of your beautiful journey.
                   </motion.p>
                   <motion.p
-                    className="text-lg text-purple-600 mb-6"
+                    className="text-lg text-purple-600 font-handwriting font-medium mb-6"
                     initial={{ opacity: 0, y: 10 }}
                     animate={messageInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ delay: 0.7 }}
@@ -593,7 +593,7 @@ export default function FinalCelebration({ name = "Aakrity", from = "Bibek" }) {
                     transition={{ delay: 0.8, duration: 0.5 }}
                   >
                     <motion.p
-                      className="text-xl text-pink-600 italic mb-2"
+                      className="text-xl text-pink-600 font-handwriting font-medium mb-2"
                       initial={{ opacity: 0 }}
                       animate={messageInView ? { opacity: 1 } : {}}
                       transition={{ delay: 1 }}
@@ -625,7 +625,7 @@ export default function FinalCelebration({ name = "Aakrity", from = "Bibek" }) {
             {activeTab === "gift" && (
               <div className="text-center">
                 <motion.h2
-                  className="text-3xl font-bold text-purple-700 mb-8"
+                  className="text-3xl font-handwriting font-bold text-purple-700 mb-16"
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ type: "spring", stiffness: 300, damping: 20 }}
@@ -741,15 +741,15 @@ export default function FinalCelebration({ name = "Aakrity", from = "Bibek" }) {
                   }}
                 >
                   <motion.p
-                    className="text-xl text-purple-700 mb-6"
+                    className="text-xl text-purple-700 font-handwriting font-medium mb-6"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.7 }}
                   >
-                    My promise to you, {name}, is that my love will last forever.
+                    My promise to you Sanu, is that my love will last forever.
                   </motion.p>
                   <motion.p
-                    className="text-lg text-purple-600 mb-4"
+                    className="text-lg text-purple-600 font-handwriting font-medium mb-4"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.9 }}
@@ -757,7 +757,7 @@ export default function FinalCelebration({ name = "Aakrity", from = "Bibek" }) {
                     Through every sunrise and sunset, through every joy and challenge, my heart belongs to you.
                   </motion.p>
                   <motion.p
-                    className="text-lg text-purple-600 mb-4"
+                    className="text-lg text-purple-600 font-handwriting font-medium mb-4"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 1.1 }}
@@ -765,7 +765,7 @@ export default function FinalCelebration({ name = "Aakrity", from = "Bibek" }) {
                     Time may pass, seasons may change, but my love for you will remain constant and true.
                   </motion.p>
                   <motion.p
-                    className="text-lg text-purple-600"
+                    className="text-lg text-purple-600 font-handwriting font-medium"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 1.3 }}
@@ -809,7 +809,7 @@ export default function FinalCelebration({ name = "Aakrity", from = "Bibek" }) {
                 </motion.div>
 
                 <motion.p
-                  className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600 mb-4"
+                  className="text-2xl font-handwriting font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600 mb-4"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 2 }}
@@ -826,8 +826,8 @@ export default function FinalCelebration({ name = "Aakrity", from = "Bibek" }) {
                   animate={{ opacity: 1 }}
                   transition={{ delay: 2.2 }}
                 >
-                  <p className="text-xl font-bold text-pink-600">Forever yours,</p>
-                  <p className="text-2xl font-bold text-purple-700">{from} ❤️</p>
+                  <p className="text-xl font-handwriting font-bold text-pink-600">Forever yours,</p>
+                  <p className="text-2xl font-handwriting font-bold text-purple-700">{from} ❤️</p>
                 </motion.div>
               </div>
             )}

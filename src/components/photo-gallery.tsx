@@ -39,7 +39,7 @@ export default function PhotoGallery() {
   }, [controls, inView])
 
   useEffect(() => {
-    // Generate random photos with different sizes, rotations, and positions
+    // Generate photos with zigzag layout
     const generatePhotos = () => {
       const newPhotos: Photo[] = []
       const containerWidth = containerRef.current?.offsetWidth || 1000
@@ -54,43 +54,43 @@ export default function PhotoGallery() {
         "from-rose-100 to-pink-100", // Pink
       ]
 
-      // Create a grid of positions with minimal gaps
-      const cols = windowWidth < 640 ? 1 : windowWidth < 768 ? 2 : 3
-      const rows = windowWidth < 640 ? 6 : 4
+      // Enhanced responsive grid setup
+      // Adjusted column count based on screen sizes
+      const cols = windowWidth < 640 ? 2 : windowWidth < 1024 ? 3 : 4
       
-      // Calculate photo size based on screen width
-      const baseSize = windowWidth < 640 ? 300 : windowWidth < 1024 ? 400 : 600
-      const scaleFactor = windowWidth < 640 ? 2.5 : windowWidth < 1024 ? 3 : 3.5
+      // Significantly larger base sizes for bigger screens
+      // Increased base sizes across all breakpoints, with larger jumps for desktop
+      const baseSize = windowWidth < 640 ? 220 : windowWidth < 1024 ? 380 : windowWidth < 1440 ? 480 : 550
       
-      // Calculate cell dimensions with tighter spacing
-      // Reduce cell size to create tighter packing
-      const adjustedWidth = baseSize / scaleFactor
-      const adjustedHeight = baseSize / scaleFactor
+      // Reduced scale factor to make photos appear larger
+      const scaleFactor = windowWidth < 640 ? 1.8 : windowWidth < 1024 ? 1.5 : 1.2
       
-      // Calculate tighter cell dimensions
+      // Calculate cell dimensions
       const cellWidth = containerWidth / cols
-      const cellHeight = containerHeight / rows
+      const cellHeight = baseSize / 1.5
       
-      // Calculate overlap factor to reduce gaps
-      const overlapFactor = 0.85 // Higher value means more overlap/tighter packing
+      // Reduced overlap for more spacing between photos on larger screens
+      const overlapFactor = windowWidth < 640 ? 0.85 : 0.75
       
-      const totalPhotos = windowWidth < 640 ? 6 : 12;
+      const totalPhotos = 12 // Use all available photos
       
       for (let i = 0; i < totalPhotos; i++) {
-        // Calculate base position in grid
+        // Calculate base position in zigzag grid
         const col = i % cols
         const row = Math.floor(i / cols)
-
-        // Add minimal randomness to position within cell and reduce the gap
-        // Use overlapFactor to create tighter packing
-        const baseX = col * cellWidth * overlapFactor
-        const baseY = row * cellHeight * overlapFactor
         
-        // Reduce the randomness factor for tighter packing
-        const randomX = baseX + (Math.random() * 0.2 + 0.4) * cellWidth
-        const randomY = baseY + (Math.random() * 0.2 + 0.4) * cellHeight
+        // Create zigzag effect by offsetting every other column vertically
+        const zigzagOffset = col % 2 === 0 ? 0 : cellHeight / 2
+        
+        // Base position calculation with zigzag offset
+        const baseX = col * cellWidth * overlapFactor
+        const baseY = (row * cellHeight * overlapFactor) + zigzagOffset
+        
+        // Add subtle randomness to the position for natural feel
+        const randomX = baseX + (Math.random() * 0.15 + 0.4) * cellWidth
+        const randomY = baseY + (Math.random() * 0.15 + 0.4) * cellHeight
 
-        // Maintain photo dimensions for variety - KEEP SAME SIZES
+        // Vary photo dimensions slightly for visual interest
         const isPortrait = Math.random() > 0.5
         const width = isPortrait ? baseSize * 0.75 : baseSize
         const height = isPortrait ? baseSize : baseSize * 0.75
@@ -99,16 +99,18 @@ export default function PhotoGallery() {
         const frameStyle = Math.floor(Math.random() * 3)
 
         // Use imported images from our array
-        // If we run out of images, cycle back to the beginning
         const imageIndex = i % photoImages.length;
+        
+        // Vary rotation slightly less on larger screens for better viewing
+        const rotationFactor = windowWidth < 640 ? 18 : windowWidth < 1024 ? 10 : 8;
         
         newPhotos.push({
           id: i,
-          src: photoImages[imageIndex], // Use imported image
+          src: photoImages[imageIndex],
           alt: `Memory ${i + 1}`,
           width,
           height,
-          rotation: Math.random() * 24 - 12, // -12 to 12 degrees
+          rotation: Math.random() * rotationFactor * 2 - rotationFactor, 
           delay: i * 0.1,
           zIndex: Math.floor(Math.random() * 10),
           position: {
@@ -124,12 +126,11 @@ export default function PhotoGallery() {
       setPhotos(newPhotos)
     }
 
-    // Wait for container to be available
+    // Generate photos when container is available or window resizes
     if (containerRef.current) {
       generatePhotos()
     }
 
-    // Regenerate on window resize
     window.addEventListener("resize", generatePhotos)
     return () => window.removeEventListener("resize", generatePhotos)
   }, [windowWidth])
@@ -233,7 +234,7 @@ export default function PhotoGallery() {
 
                 {/* Photo caption */}
                 <motion.div
-                  className="absolute bottom-0 left-0 right-0 bg-black/60 text-white p-2 text-sm"
+                  className="absolute bottom-0 left-0 right-0 bg-black/60 text-white p-2 text-xs sm:text-sm md:text-base"
                   initial={{ opacity: 0, y: 20 }}
                   whileHover={{ opacity: 1, y: 0 }}
                 >
@@ -245,11 +246,11 @@ export default function PhotoGallery() {
 
         case 1: // Polaroid style
           return (
-            <div className="bg-white p-4 pb-16 shadow-lg">
+            <div className="bg-white p-3 sm:p-4 md:p-5 pb-12 sm:pb-16 md:pb-20 shadow-lg">
               <div className="relative w-full h-full overflow-hidden">
                 <img src={photo.src} alt={photo.alt} className="w-full h-full object-cover" />
               </div>
-              <p className="absolute bottom-4 left-0 right-0 text-center text-sm font-handwriting text-gray-700">
+              <p className="absolute bottom-2 sm:bottom-4 md:bottom-6 left-0 right-0 text-center text-xs sm:text-sm md:text-base font-handwriting text-gray-700">
                 {photo.alt}
               </p>
             </div>
@@ -258,7 +259,7 @@ export default function PhotoGallery() {
         case 2: // Fancy frame
           return (
             <div
-              className={`p-5 bg-gradient-to-br ${photo.frameColor} rounded-sm shadow-lg border border-white/50`}
+              className={`p-3 sm:p-5 md:p-6 bg-gradient-to-br ${photo.frameColor} rounded-sm shadow-lg border border-white/50`}
               style={{ boxShadow: "0 4px 12px rgba(0,0,0,0.15), inset 0 0 2px rgba(255,255,255,0.5)" }}
             >
               <div className="relative w-full h-full overflow-hidden border-2 border-white/80">
@@ -266,7 +267,7 @@ export default function PhotoGallery() {
 
                 {/* Photo caption */}
                 <motion.div
-                  className="absolute bottom-0 left-0 right-0 bg-black/60 text-white p-2 text-sm"
+                  className="absolute bottom-0 left-0 right-0 bg-black/60 text-white p-2 text-xs sm:text-sm md:text-base"
                   initial={{ opacity: 0, y: 20 }}
                   whileHover={{ opacity: 1, y: 0 }}
                 >
@@ -284,10 +285,20 @@ export default function PhotoGallery() {
     return getFrameStyle()
   }
 
+  // Calculate dynamic height based on screen size and content
+  // Make it taller on larger screens to accommodate larger images
+  const galleryHeight = windowWidth < 640 
+    ? "min-h-[800px]" 
+    : windowWidth < 1024 
+      ? "min-h-[1200px]" 
+      : windowWidth < 1440 
+        ? "min-h-[1600px]" 
+        : "min-h-[2000px]";
+
   return (
     <motion.div
       ref={ref}
-      className="relative w-full min-h-[800px] md:min-h-[1000px] overflow-hidden py-8 px-4"
+      className={`relative w-full ${galleryHeight} overflow-x-hidden overflow-y-auto py-8 px-4`}
       initial="hidden"
       animate={controls}
       variants={containerVariants}
@@ -318,6 +329,12 @@ export default function PhotoGallery() {
             transformOrigin: "center center",
           }}
           whileHover={{
+            scale: 1.15,
+            rotate: 0,
+            zIndex: 30,
+            transition: { type: "spring", stiffness: 300, damping: 15 },
+          }}
+          whileTap={{
             scale: 1.15,
             rotate: 0,
             zIndex: 30,

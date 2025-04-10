@@ -1,21 +1,19 @@
-"use client"
-
-import { useState } from "react"
-import { motion } from "framer-motion"
-import { Heart, Gift, Infinity } from "lucide-react"
-import Confetti from "react-confetti"
-import { useWindowSize } from "react-use"
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { Heart, Gift, Infinity } from "lucide-react";
+import Confetti from "react-confetti";
+import { useWindowSize } from "react-use";
 
 export default function GiftBox() {
-  const [isOpen, setIsOpen] = useState(false)
-  const [showConfetti, setShowConfetti] = useState(false)
-  const { width, height } = useWindowSize()
+  const [isOpen, setIsOpen] = useState(false);
+  const [showConfetti, setShowConfetti] = useState(false);
+  const { width, height } = useWindowSize();
 
   const handleOpen = () => {
-    setIsOpen(true)
-    setShowConfetti(true)
-    setTimeout(() => setShowConfetti(false), 5000)
-  }
+    setIsOpen(true);
+    setShowConfetti(true);
+    setTimeout(() => setShowConfetti(false), 5000);
+  };
 
   return (
     <div className="flex flex-col items-center justify-center">
@@ -27,7 +25,7 @@ export default function GiftBox() {
           onClick={handleOpen}
         >
           <motion.div
-            className="w-64 h-64 bg-gradient-to-r from-pink-400 to-purple-500 rounded-2xl shadow-2xl flex items-center justify-center"
+            className="w-64 h-64 bg-gradient-to-r from-pink-400 to-purple-500 rounded-2xl shadow-2xl flex items-center justify-center relative"
             animate={{
               scale: [1, 1.02, 1],
               rotate: [0, 1, 0, -1, 0],
@@ -37,13 +35,25 @@ export default function GiftBox() {
               duration: 3,
             }}
           >
+            {/* Gift Box Ribbon */}
             <div className="absolute top-0 left-0 right-0 h-10 bg-gradient-to-r from-pink-500 to-purple-600 rounded-t-2xl" />
-            <div className="absolute inset-0 flex items-center justify-center">
-              <Gift className="w-32 h-32 text-white" />
-            </div>
             <div className="absolute w-12 h-full bg-gradient-to-r from-pink-500 to-purple-600 left-1/2 -translate-x-1/2" />
             <div className="absolute w-full h-12 bg-gradient-to-r from-pink-500 to-purple-600 top-1/2 -translate-y-1/2" />
+
+            {/* Ribbon Cross */}
+            <div className="absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-pink-500 to-purple-600 transform rotate-45 -translate-y-1/2" />
+            <div className="absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-pink-500 to-purple-600 transform -rotate-45 -translate-y-1/2" />
+
+            {/* Box Content */}
+            <div className="absolute inset-0 flex items-center justify-center">
+            <Gift className="w-32 h-32" style={{ color: '#c92331' }} />
+            </div>
+
+            {/* Box Top */}
+            <div className="absolute top-0 left-0 right-0 h-10 bg-gradient-to-r from-pink-500 to-purple-600 rounded-t-2xl" />
           </motion.div>
+
+          {/* Button to open the box */}
           <motion.div
             className="absolute -top-8 -right-8"
             animate={{
@@ -59,7 +69,10 @@ export default function GiftBox() {
               <p className="text-white font-bold">Click Me!</p>
             </div>
           </motion.div>
-          <p className="text-lg text-purple-700 mt-6">Click to open your special gift!</p>
+
+          <p className="text-lg text-purple-700 mt-6">
+            Click to open your special gift!
+          </p>
         </motion.div>
       ) : (
         <motion.div
@@ -97,15 +110,18 @@ export default function GiftBox() {
             </div>
           </motion.div>
 
-          <h3 className="text-3xl font-bold text-purple-700 mb-4">My Heart Is Yours Forever</h3>
+          <h3 className="text-3xl font-bold text-purple-700 mb-4">
+            My Heart Is Yours Forever
+          </h3>
 
           <div className="max-w-md mx-auto bg-gradient-to-r from-pink-50 to-purple-50 p-6 rounded-xl border border-pink-200 shadow-lg mb-8">
-            <p className="text-lg text-purple-700 mb-4">
-              This gift represents my heart, which belongs to you completely. No matter where life takes us, my love for
-              you will never fade.
+            <p className="text-lg text-purple-700 font-handwriting font-medium mb-4">
+              This gift represents my heart, which belongs to you completely. No
+              matter where life takes us, my love for you will never fade.
             </p>
-            <p className="text-lg text-purple-700">
-              I promise to cherish every moment with you and make each day special, not just your birthday.
+            <p className="text-lg text-purple-700 font-handwriting font-medium">
+              I promise to cherish every moment with you and make each day
+              special, not just your birthday.
             </p>
           </div>
 
@@ -133,12 +149,23 @@ export default function GiftBox() {
             ))}
           </div>
 
-          <p className="text-xl font-bold text-pink-600">Forever yours,</p>
-          <p className="text-2xl font-bold text-purple-700">Bibek ❤️</p>
+          <p className="text-xl font-handwriting font-bold text-pink-600">
+            Forever yours,
+          </p>
+          <p className="text-2xl font-handwriting font-bold text-purple-700">
+            Bibek ❤️
+          </p>
         </motion.div>
       )}
 
-      {showConfetti && <Confetti width={width} height={height} recycle={false} numberOfPieces={300} />}
+      {showConfetti && (
+        <Confetti
+          width={width}
+          height={height}
+          recycle={false}
+          numberOfPieces={300}
+        />
+      )}
     </div>
-  )
+  );
 }
