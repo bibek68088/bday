@@ -54,16 +54,26 @@ export default function PhotoGallery() {
         "from-rose-100 to-pink-100", // Pink
       ]
 
-      // Create a grid of positions but with randomness
+      // Create a grid of positions with minimal gaps
       const cols = windowWidth < 640 ? 1 : windowWidth < 768 ? 2 : 3
       const rows = windowWidth < 640 ? 6 : 4
-      const cellWidth = containerWidth / cols
-      const cellHeight = containerHeight / rows
-
+      
       // Calculate photo size based on screen width
       const baseSize = windowWidth < 640 ? 300 : windowWidth < 1024 ? 400 : 600
       const scaleFactor = windowWidth < 640 ? 2.5 : windowWidth < 1024 ? 3 : 3.5
-
+      
+      // Calculate cell dimensions with tighter spacing
+      // Reduce cell size to create tighter packing
+      const adjustedWidth = baseSize / scaleFactor
+      const adjustedHeight = baseSize / scaleFactor
+      
+      // Calculate tighter cell dimensions
+      const cellWidth = containerWidth / cols
+      const cellHeight = containerHeight / rows
+      
+      // Calculate overlap factor to reduce gaps
+      const overlapFactor = 0.85 // Higher value means more overlap/tighter packing
+      
       const totalPhotos = windowWidth < 640 ? 6 : 12;
       
       for (let i = 0; i < totalPhotos; i++) {
@@ -71,13 +81,16 @@ export default function PhotoGallery() {
         const col = i % cols
         const row = Math.floor(i / cols)
 
-        // Add randomness to position within cell
-        const baseX = col * cellWidth
-        const baseY = row * cellHeight
-        const randomX = baseX + (Math.random() * 0.5 + 0.25) * cellWidth
-        const randomY = baseY + (Math.random() * 0.5 + 0.25) * cellHeight
+        // Add minimal randomness to position within cell and reduce the gap
+        // Use overlapFactor to create tighter packing
+        const baseX = col * cellWidth * overlapFactor
+        const baseY = row * cellHeight * overlapFactor
+        
+        // Reduce the randomness factor for tighter packing
+        const randomX = baseX + (Math.random() * 0.2 + 0.4) * cellWidth
+        const randomY = baseY + (Math.random() * 0.2 + 0.4) * cellHeight
 
-        // Randomize photo dimensions for variety - LARGER FRAMES
+        // Maintain photo dimensions for variety - KEEP SAME SIZES
         const isPortrait = Math.random() > 0.5
         const width = isPortrait ? baseSize * 0.75 : baseSize
         const height = isPortrait ? baseSize : baseSize * 0.75
